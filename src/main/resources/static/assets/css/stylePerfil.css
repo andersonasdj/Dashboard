@@ -1,0 +1,154 @@
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
+}
+div#container{
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left:0px;
+	background-color: #eee;
+	display: block;
+	background-color: #EFF8FB;
+}
+div.containerPerfil{
+	
+	background-color: #EFF8FB;
+}
+
+@media (max-width: 780px) {
+  #imagem{display: none;}
+  #removetocel{display: none;}
+  .btn-toggle{display: block;}
+  #campoExportar{display: none;}
+  #grafico{display: none;}
+  .btn-toggle{display: block;}
+}
+
+@media (max-width: 990px) {
+  #botoesRelatorio{display: none;}
+  .btn-toggle{display: block;}
+}
+
+@media (max-width: 780px) {
+  #perfil{height: 50px; 
+  width: 780px; 
+  margin-left: -200px; 
+  margin-top: 200px;
+  font: 8px Verdana, arial, helvetica, sans-serif;}
+  
+}
+
+
+#mascara{
+    display:none;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    background-color:#000;
+}
+ 
+
+.ocultar{
+	display:none;
+}
+.miniatura {
+    max-width:50px;
+    max-height:50px;
+    width: auto;
+    height: auto;
+}
+
+
+.calender{
+  width: 130px;
+  height: 130px;
+  background-color: rgb(153, 193, 241);
+  border-radius: 10%;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.top{
+  width: 100%;
+  height: 50px;
+  background-color: rgb(153, 193, 241);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#months{
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+}
+#days{
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-top: 50px;
+}
+#dates{
+  font-size: 5rem;
+  font-weight: 700;
+}
+#years{
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.time-title{
+  background-color: rgb(28, 113, 216);
+  border-radius: 30px;
+  color: #fff;
+  padding: 3px 10px;
+  margin: 5px;
+}
+.time{
+  display: flex;
+  gap: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+				
+				[class*="col-"] {
+				  width: 50%;
+				}
+				
+				@media only screen and (min-width: 300px) {
+				  /* For tablets: */
+				  .col-s-1 {width: 8.33%;}
+				  .col-s-2 {width: 16.66%;}
+				  .col-s-3 {width: 25%;}
+				  .col-s-4 {width: 33.33%;}
+				  .col-s-5 {width: 41.66%;}
+				  .col-s-6 {width: 50%;}
+				  .col-s-7 {width: 58.33%;}
+				  .col-s-8 {width: 66.66%;}
+				  .col-s-9 {width: 75%;}
+				  .col-s-10 {width: 83.33%;}
+				  .col-s-11 {width: 91.66%;}
+				  .col-s-12 {width: 100%;}
+				}
+				
+			}
