@@ -16,8 +16,12 @@ public class SolicitacaoRestController {
 	
 	@GetMapping
 	public Long totalNaoFinalizadas() {
-		
 		return solicitacaoService.listarTotalNaoFinalizados();
 	}
 
+	@GetMapping("/critica")
+	public Long totalCritica() {
+		return solicitacaoService.listarTotalCritica();
+	}
+	
 }

@@ -15,4 +15,11 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
 	public Long totalNaoFinalizados();
 	
 	
+	@Query(nativeQuery = true,
+			value = "SELECT COUNT(*) FROM solicitacoes s "
+					+ "WHERE s.excluido != true "
+					+ "AND s.status != 'FINALIZADO' "
+					+ "AND s.prioridade = 'CRITICA'")
+	public Long totalCritica();
+	
 }

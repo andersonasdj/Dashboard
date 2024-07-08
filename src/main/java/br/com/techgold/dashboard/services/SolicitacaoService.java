@@ -15,6 +15,8 @@ public class SolicitacaoService {
 		return repository.totalNaoFinalizados();
 	}
 	
-	
+	public Long listarTotalCritica() {
+		return repository.totalCritica();
+	}
 
 }
