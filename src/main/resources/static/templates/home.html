@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Sistech - Dashboard</title>
+		<link rel="shortcut icon" href="assets/img/favicon.ico">
+		<link rel="stylesheet" href="assets/css/index.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
+		<link rel="stylesheet" href="assets/css/line-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/style-new.css">
+	</head>
+	<body>
+		<audio id="beepAudio">
+			<source src="assets/audio/beep.mp3" type="audio/mpeg">
+		</audio>
+
+		<!-- Dashboard -->
+		<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+		    <!-- Vertical Navbar -->
+		    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+		        <div class="container-fluid">
+		            <!-- Toggler -->
+		            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		                <span class="navbar-toggler-icon"> </span>
+		            </button>
+		            <!-- Brand -->
+		            <!-- User menu (mobile) -->
+		            <div class="navbar-user d-lg-none">
+		                <!-- Dropdown -->
+		                <div class="dropdown">
+		                    <!-- Toggle -->
+		                    <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                        <div class="avatar-parent-child">
+		                            <img alt="Image Placeholder" src="assets/img/login.png" class="avatar avatar- rounded-circle">
+		                            <span class="avatar-child avatar-badge bg-success"> </span>
+		                        </div>
+		                    </a>
+		                    <!-- Menu -->
+		                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar"> </div>
+		                </div>
+		            </div>
+		            <!-- Collapse -->
+		            <div class="collapse navbar-collapse" id="sidebarCollapse">
+		                <!-- Navigation -->
+		               
+		                <!-- Divider -->
+		                <hr class="navbar-divider my-5 opacity-20">
+		                <!-- Navigation -->
+		                <ul class="navbar-nav mb-md-4">
+		                    <li>
+		                        <div class="nav-link text-xs font-semibold text-uppercase text-muted ls-wide" href="#">
+		                            Técnicos disponíveis
+		                            <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-4" style="font-size: 14px;" id="qtdDisponiveis"> </span>
+		                        </div>
+		                    </li>
+		                    <div id="funcionariosDisponiveis"> </div>
+		                </ul>
+		                <!-- Push content down -->
+		                <div class="mt-auto"> </div>
+		                <!-- User (md) -->
+		                <ul class="navbar-nav">
+		                    <li class="nav-item">
+		                        <a class="nav-link" href="#">
+		                            <i class="bi bi-info-circle"> </i> Sobre
+		                        </a>
+		                    </li>
+		                    <li class="nav-item">
+		                        <a class="nav-link" href="/dashboard/logout">
+		                            <i class="bi bi-box-arrow-left"> </i> Logout
+		                        </a>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>
+		    </nav>
+		    <!-- Main content -->
+		    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+		        <!-- Header -->
+		        <header class="bg-surface-primary border-bottom pt-6">
+		            <div class="container-fluid">
+		                <div class="mb-npx">
+		                    <div class="row align-items-center">
+		                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+		                            <!-- Title -->
+		                            <h1 class="h3 mb-0 ls-tight" style="color: #05419b !important;">Sistech - Dashboard</h1>
+		                            <span id="lastOne" hidden > </span>
+			                            <div class="delModal" style="display:none" id="modal">
+											<div class="card shadow border-0">
+					                            <div class="card-body">
+					                                <div class="row">
+					                                    <div class="col">
+					                                        <span class="h4 font-semibold text-muted text-sm d-block mb-2">Atualização</span>
+					                                        <span class="h3 font-bold mb-0" id="funcionarioAtualizacao"> </span>
+					                                    </div>
+					                                    <div class="col-auto">
+					                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle" style="background-color: rgb(46, 194, 126) !important">
+					                                            <i class="bi bi-arrow-clockwise"> </i>
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>
+										</div>
+		                        </div>
+		                        <!-- Actions -->
+		                        <div class="col-sm-6 col-12 text-sm-end">
+		                            <div class="mx-n1"> </div>
+		                        </div>
+		                    </div>
+		                    <br />
+		                    <!-- Nav -->
+		                </div>
+		            </div>
+		        </header>
+		        <!-- Main -->
+		        <main class="py-6 bg-surface-secondary">
+		            <div class="container-fluid">
+		                <!-- Card stats -->
+		                <div class="row g-6 mb-6">
+		                    <div class="col-xl-3 col-sm-6 col-12">
+		                        <div class="card shadow border-0">
+		                            <div class="card-body">
+		                                <div class="row">
+		                                    <div class="col">
+		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Solicitações ativas</span>
+		                                        <span class="h3 font-bold mb-0" id="qtdAtivas"> </span>
+		                                    </div>
+		                                    <div class="col-auto">
+		                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+		                                            <i class="bi-card-list"> </i>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="mt-2 mb-0 text-sm">
+		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="abertasHoje">
+		                                        
+		                                    </span>
+		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-sm-6 col-12">
+		                        <div class="card shadow border-0">
+		                            <div class="card-body">
+		                                <div class="row">
+		                                    <div class="col">
+		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Solicitações críticas</span>
+		                                        <span class="h3 font-bold mb-0" id="qtdCriticas"> </span>
+		                                    </div>
+		                                    <div class="col-auto">
+		                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle" style="background-color: rgb(243 16 17) !important">
+		                                            <i class="bi bi-exclamation-triangle"> </i>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="mt-2 mb-0 text-sm">
+		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="qtdCriticasHoje">
+		                                    </span>
+		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-sm-6 col-12">
+		                        <div class="card shadow border-0">
+		                            <div class="card-body">
+		                                <div class="row">
+		                                    <div class="col">
+		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Problemas</span>
+		                                        <span class="h3 font-bold mb-0" id="qtdProblemas"> </span>
+		                                    </div>
+		                                    <div class="col-auto">
+		                                        <div class="icon icon-shape bg-info text-white text-lg rounded-circle" style="background-color: rgb(255 118 0) !important;">
+		                                            <i class="bi bi-question-circle"> </i>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="mt-2 mb-0 text-sm">
+		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="qtdProblemasHoje">
+		                                    </span>
+		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-sm-6 col-12">
+		                        <div class="card shadow border-0">
+		                            <div class="card-body">
+		                                <div class="row">
+		                                    <div class="col">
+		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Agendamentos atrasados</span>
+		                                        <span class="h3 font-bold mb-0" id="qtdAtrasados"> </span>
+		                                    </div>
+		                                    <div class="col-auto">
+		                                        <div class="icon icon-shape bg-warning text-white text-lg rounded-circle" style="background-color: rgb(255 213 0) !important;">
+		                                            <i class="bi bi-clock-history"> </i>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="mt-2 mb-0 text-sm">
+		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="qtdAgendadosHoje">
+		                                    </span>
+		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="card shadow border-0 mb-7">
+		                    <div class="card-header">
+		                        <h5 class="mb-0">Solicitações Prioritárias</h5>
+		                    </div>
+		                    <div class="table-responsive">
+		                        <table class="table table-hover table-nowrap">
+		                            <thead class="thead-light">
+		                                <tr>
+		                                    <th scope="col" class="fontth">ID</th>
+		                                    <th scope="col" class="fontth">Cliente</th>
+		                                    <th scope="col" class="fontth">Afetado</th>
+		                                    <th scope="col" class="fontth">Descrição</th>
+		                                    <th scope="col" class="fontth">Classificação</th>
+		                                    <th scope="col" class="fontth">Prioridade</th>
+		                                    <th scope="col" class="fontth">Local</th>
+		                                    <th scope="col" class="fontth">Status</th>
+		                                    <th scope="col" class="fontth">Tecnico</th>
+		                                    <th scope="col" class="fontth">Peso</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="conteudoTabela"> </tbody>
+		                        </table>
+		                    </div>
+		                </div>
+		            </div>
+		        </main>
+		    </div>
+		</div>
+	</body>
+	<script src="assets/js/jquery-3.6.3.js"></script>
+	<script>
+		dadosDashboard();
+		setInterval(ultimaAtualizacao, 2000);
+		
+		function showModal() {
+			$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/dashboard/api/solicitacao/lastupdatesolicitacao",
+			success: function (data) {
+				var cor;
+				if(data.status == "ABERTO"){cor = 'style="color:red"'}
+				if(data.status == "ANDAMENTO"){cor = 'style="color:blue"'}
+				if(data.status == "FINALIZADO"){cor = 'style="color:green"'}
+				if(data.status == "AGENDADO"){cor = 'style="color:orange"'}
+				if(data.status == "PAUSADO"){cor = 'style="color:gray"'}
+				if(data.status == "AGUARDANDO"){cor = 'style="color:gray"'}
+						
+				$('#funcionarioAtualizacao').text("");		
+				$('#funcionarioAtualizacao').append(data.nomeFuncionario + ',<br /> Atualizou a solicitação de ID: <u>'+ data.id+'</u><br /> para  <span '+ cor+'><b><u>' + data.status +'</u></b></span>');
+				var audio = document.getElementById("beepAudio");
+				audio.play();
+				$("#modal").fadeIn(4000);
+				$("#modal").fadeOut(4000);
+			},
+			statusCode: {
+				    500: function() { alert('Erro! Contate o desenvolvedor!'); },
+				    401: function() { alert('Realize login novamente!'); }
+			}
+			});
+		}
+		
+		function ultimaAtualizacao(){
+			let idAtual;
+			
+			$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/dashboard/api/solicitacao/lastupdateid",
+			success: function (data) {
+				
+				if($('#lastOne').text() != data){
+					$('#lastOne').text(data);
+					showModal();
+					dadosDashboard();
+				}
+			},
+			statusCode: {
+				    500: function() { alert('Erro! Contate o desenvolvedor!'); },
+				    401: function() { alert('Realize login novamente!'); }
+			}
+			});
+		} 
+		
+		function dadosDashboard(){
+			$.ajax({
+			type: "GET",
+			contentType: "application/json",
+			url: "/dashboard/api/solicitacao/dados",
+			success: function (data) {
+				$('#qtdCriticas').text("");
+				$('#qtdAtivas').text("");
+				$('#qtdProblemas').text("");
+				$('#qtdAtrasados').text("");
+				$('#qtdDisponiveis').text("");
+				$('#funcionariosDisponiveis').empty();
+				$('#qtdCriticas').text(data.criticas);
+				$('#qtdAtivas').text(data.ativas);
+				$('#qtdProblemas').text(data.problemas);
+				$('#qtdAtrasados').text(data.atrasados);
+				$('#qtdDisponiveis').text(data.funcionariosDisponiveis.length);
+				
+				data.funcionariosDisponiveis.map(f => {
+					var conteudo = 
+							'<li>'
+		                     +'<a href="#" class="nav-link d-flex align-items-center" style="padding: .3rem 1.1rem;">'
+		                     +' <div class="me-4">'
+		                     +'  <div class="position-relative d-inline-block text-white">'
+		                     +'   <span class="avatar bg-soft-warning text-warning rounded-circle">'+f.inicial+'</span>'
+		                     +'   <span class="position-absolute bottom-2 end-2 transform translate-x-1/2 translate-y-1/2 border-2 border-solid border-current w-3 h-3 bg-success rounded-circle"> </span>'
+		                     +'  </div>'
+		                     +' </div>'
+		                     +' <div>'
+		                     +'  <span class="d-block text-sm font-semibold">'
+		                     +'   '+f.nome
+		                     +'  </span>'
+		                     +' </div>'
+		                     +'</a>'
+		                     +'</li>'
+					$('#funcionariosDisponiveis').append(conteudo);
+				});
+				$('#abertasHoje').text("");
+				$('#qtdCriticasHoje').text("");
+				$('#qtdProblemasHoje').text("");
+				$('#qtdAgendadosHoje').text("");
+				$('#conteudoTabela').empty();
+				
+				if(data.abertasHoje >= 0){ $('#abertasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.abertasHoje); }
+				else{ $('#abertasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.abertasHoje); }
+				
+				if(data.criticasHoje <= 0){ $('#qtdCriticasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.criticasHoje); }
+				else{ $('#qtdCriticasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.criticasHoje); }
+				
+				if(data.problemasHoje <= 0){ $('#qtdProblemasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.problemasHoje); }
+				else{ $('#qtdProblemasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.problemasHoje); }
+				
+				if(data.agendadosHoje <= 0){ $('#qtdAgendadosHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.agendadosHoje); }
+				else{ $('#qtdAgendadosHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.agendadosHoje); }
+				
+				var alertaPrioridade, alertaPeso;
+				data.solicitacoes.map(f => {
+					
+					if(f.prioridade == "CRITICA"){ alertaPrioridade ="class='blink' style='color: red; font-weight: bold;'"; }
+					else if(f.prioridade == "ALTA"){ alertaPrioridade ="style='color: orange; font-weight: bold;'"; }
+					else{ alertaPrioridade ="class='' style=''"; }
+					
+					if(f.peso > 7){ alertaPeso = "class='blink' style='color: red; font-weight: bold;'"; }
+					else if(f.peso > 3 && f.peso <= 7 ){ alertaPeso = "style='color: orange; font-weight: bold;'"; }
+					else{ alertaPeso = "style='color: blue; font-weight: bold;'"; }
+					
+					var conteudo = 
+							'<tr>'
+                               +'<td>'+f.id+'</td>'
+                                +'<td>'+f.nomeCliente+'</td>'
+                                +'<td>'+f.afetado+'</td>'
+                                +'<td>'+f.descricao+'</td>'
+                                +'<td>'+f.classificacao+'</td>'
+                                +'<td '+alertaPrioridade+'>'+f.prioridade+'</td>'
+                                +'<td>'+f.local+'</td>'
+                                +'<td>'+f.status+'</td>'
+                                +'<td>'+f.nomeFuncionario+'</td>'
+                                +'<td '+alertaPeso+'>'+f.peso+'</td>'
+                            +'</tr>'
+					$('#conteudoTabela').append(conteudo);
+				});
+			},
+			statusCode: {
+				    500: function() { alert('Erro! Contate o desenvolvedor!'); },
+				    401: function() { alert('Realize login novamente!'); }
+				}
+			});
+		} 
+	</script>
+</html>

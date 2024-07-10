@@ -1,0 +1,15 @@
+/*@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);*/
+/*@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");*/
+
+.blink {
+	animation: blink 1.5s steps(1, end) infinite;
+}
+.fontth{
+	font-size:13px !important;
+}
+
+@keyframes blink {
+	40% { opacity: 1; }
+	50% { opacity: 0; }
+	80% { opacity: 1; }
+}
