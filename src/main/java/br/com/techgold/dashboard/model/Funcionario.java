@@ -41,6 +41,10 @@ public class Funcionario extends Usuario implements UserDetails{
 	
 	private Boolean trocaSenha;
 	
+	private Boolean refeicao;
+	
+	private Boolean ausente;
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_EDITOR") );

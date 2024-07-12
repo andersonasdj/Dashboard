@@ -12,7 +12,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 	
 	@Query(nativeQuery = true,
 			value = "SELECT * FROM funcionarios f "
-					+ "WHERE f.ativo = true")
+					+ "WHERE f.ativo = true "
+					+ "AND f.ausente != true ")
 	public List<Funcionario> buscarFuncionarios();
 	
 	@Query(value = "SELECT COUNT(*) FROM funcionarios", nativeQuery = true)

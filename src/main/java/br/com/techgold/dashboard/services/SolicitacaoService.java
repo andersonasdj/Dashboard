@@ -50,7 +50,7 @@ public class SolicitacaoService {
 				name = name.replaceAll("da|das|do|dos", "");
 				//retirando todas as palvras exceto a primeira letra e transformando e maiusculo.
 				name = name.replaceAll("\\B\\w\\s*", "").toUpperCase();
-				funcionariosDisponiveis.add(new DTOFuncionarios(f.getNomeFuncionario(),name));
+				funcionariosDisponiveis.add(new DTOFuncionarios(f.getNomeFuncionario(),name, f.getRefeicao()));
 			}
 		});
 
