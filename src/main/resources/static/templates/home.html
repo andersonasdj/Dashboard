@@ -2,12 +2,12 @@
 <html lang="br">
 	<head>
 		<meta charset="UTF-8">
-		<title>Sistech - Dashboard</title>
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
 		<link rel="stylesheet" href="assets/css/index.css">
 		<link rel="stylesheet" href="assets/css/bootstrap-icons.min.css">
 		<link rel="stylesheet" href="assets/css/line-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/style-new.css">
+		<title>Sistech - Dashboard</title>
 	</head>
 	<body>
 		<audio id="beepAudio">
@@ -140,11 +140,25 @@
 		                                        </div>
 		                                    </div>
 		                                </div>
-		                                <div class="mt-2 mb-0 text-sm">
-		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="abertasHoje">
-		                                        
-		                                    </span>
-		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                
+		                                <div class="row">
+			                                <div class="col-6">
+												<div class="mt-2 mb-0 text-sm">
+			                                    	<span class="badge badge-pill bg-soft-success text-success me-2" id="abertasHoje">
+			                                        
+			                                    	</span>
+			                                    	<span class="text-nowrap text-xs text-muted">Abertas hoje</span>
+			                                	</div>
+			                                </div>
+		                                
+			                                <div class="col-6">
+												<div class="mt-2 mb-0 text-sm">
+			                                    	<span class="badge badge-pill bg-soft-success text-success me-2" id="finalizadasHoje">
+			                                        
+			                                    	</span>
+			                                    	<span class="text-nowrap text-xs text-muted">Finalizadas hoje</span>
+			                                	</div>
+			                                </div>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -165,7 +179,7 @@
 		                                </div>
 		                                <div class="mt-2 mb-0 text-sm">
 		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="qtdCriticasHoje"> </span>
-		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                    <span class="text-nowrap text-xs text-muted">Abertas hoje</span>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -175,7 +189,7 @@
 		                            <div class="card-body">
 		                                <div class="row">
 		                                    <div class="col">
-		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Descrição</span>
+		                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Problemas</span>
 		                                        <span class="h3 font-bold mb-0" id="qtdProblemas"> </span>
 		                                    </div>
 		                                    <div class="col-auto">
@@ -186,7 +200,7 @@
 		                                </div>
 		                                <div class="mt-2 mb-0 text-sm">
 		                                    <span class="badge badge-pill bg-soft-success text-success me-2" id="qtdProblemasHoje"> </span>
-		                                    <span class="text-nowrap text-xs text-muted">Novas hoje</span>
+		                                    <span class="text-nowrap text-xs text-muted">Abertas hoje</span>
 		                                </div>
 		                            </div>
 		                        </div>
@@ -286,7 +300,6 @@
 			contentType: "application/json",
 			url: "/dashboard/api/solicitacao/lastupdateid",
 			success: function (data) {
-				
 				if($('#lastOne').text() != data){
 					$('#lastOne').text(data);
 					showModal();
@@ -347,6 +360,8 @@
 					$('#funcionariosDisponiveis').append(conteudo);
 				});
 				$('#abertasHoje').text("");
+				$('#finalizadasHoje').text("");
+				
 				$('#qtdCriticasHoje').text("");
 				$('#qtdProblemasHoje').text("");
 				$('#qtdAgendadosHoje').text("");
@@ -354,6 +369,9 @@
 				
 				if(data.abertasHoje >= 0){ $('#abertasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.abertasHoje); }
 				else{ $('#abertasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.abertasHoje); }
+				
+				if(data.finalizadasHoje >= 0){ $('#finalizadasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.finalizadasHoje); }
+				else{ $('#finalizadasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.finalizadasHoje); }
 				
 				if(data.criticasHoje <= 0){ $('#qtdCriticasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.criticasHoje); }
 				else{ $('#qtdCriticasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.criticasHoje); }

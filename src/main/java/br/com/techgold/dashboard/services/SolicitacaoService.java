@@ -59,6 +59,7 @@ public class SolicitacaoService {
 				repository.qtdCriticasHoje(hojeInicio,hojeFim),
 				repository.totalNaoFinalizados(),
 				repository.qtdAbertasHoje(hojeInicio,hojeFim),
+				repository.qtdFinalizadasHoje(hojeInicio,hojeFim),
 				repository.totalProblemas(),
 				repository.qtdProblemasHoje(hojeInicio, hojeFim),
 				repository.totalAgendamentosAtrasados(LocalDateTime.now()),

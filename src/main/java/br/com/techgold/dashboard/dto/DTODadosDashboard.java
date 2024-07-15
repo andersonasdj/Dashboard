@@ -9,6 +9,7 @@ public record DTODadosDashboard(
 		Long criticasHoje,
 		Long ativas,
 		Long abertasHoje,
+		Long finalizadasHoje,
 		Long problemas,
 		Long problemasHoje,
 		Long atrasados,

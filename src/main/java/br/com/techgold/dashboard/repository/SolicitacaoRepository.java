@@ -102,6 +102,15 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
 			value = "SELECT count(*) "
 			+ "FROM solicitacoes s "
 			+ "WHERE s.excluido = false "
+			+ "AND s.status = 'FINALIZADO' "
+			+ "AND s.dataFinalizado >= :hojeInicio "
+			+ "AND s.dataFinalizado <= :hojeFim")
+	public Long qtdFinalizadasHoje(LocalDateTime hojeInicio, LocalDateTime hojeFim);
+	
+	@Query(nativeQuery = true,
+			value = "SELECT count(*) "
+			+ "FROM solicitacoes s "
+			+ "WHERE s.excluido = false "
 			+ "AND s.prioridade = 'CRITICA' "
 			+ "AND s.dataAbertura >= :hojeInicio "
 			+ "AND s.dataAbertura <= :hojeFim")
