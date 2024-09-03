@@ -11,7 +11,7 @@ public class AppController {
 		return "templates/login.html";
 	}
 	
-	@GetMapping("/home")
+	@GetMapping("/inicio")
 	public String home() {
 		return "templates/home.html";
 	}
