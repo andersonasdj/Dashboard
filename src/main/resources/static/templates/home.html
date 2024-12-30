@@ -100,21 +100,22 @@
 			                            <div class="delModal" style="display:none" id="modal">
 											<div class="card shadow" style="border: 3px solid rgb(143, 240, 164) !important;">
 					                            <div class="card-body">
+															Aberto Por:  <span class="h4 font-bold mb-0" id="abertoPor"> </span>
 					                                <div class="row" >
 														<div class="col-3 col-s-4">
-															<div class="col">
+															<div class="col mt-3">
 						                                        <span class="h4 font-semibold text-muted text-sm d-block mb-2">Atualização</span>
 						                                        <span class="h3 font-bold mb-0" id="funcionarioAtualizacao"> </span>
 						                                    </div>
 														</div>
 														<div class="col-3 col-s-4">
-															<div class="col">
+															<div class="col mt-3">
 						                                		<span class="h4 font-semibold text-muted text-sm d-block mb-2">Cliente</span>
 						                                		<span class="h4 mb-0" id="nomeClienteAtualizacao"> </span>
 						                                	</div>
 														</div>
 														<div class="col-6 col-s-4">
-															<div class="col">
+															<div class="col mt-3">
 					                                        	<span class="h4 font-semibold text-muted text-sm d-block mb-2">Problema</span>
 					                                       		<span class="h4 mb-0" id="descricaoAtualizacao"> </span>
 					                                    	</div>
@@ -153,7 +154,6 @@
 		                                        </div>
 		                                    </div>
 		                                </div>
-		                                
 		                                <div class="row">
 			                                <div class="col-6">
 												<div class="mt-2 mb-0 text-sm">
@@ -163,7 +163,6 @@
 			                                    	<span class="text-nowrap text-xs text-muted">Abertas hoje</span>
 			                                	</div>
 			                                </div>
-		                                
 			                                <div class="col-6">
 												<div class="mt-2 mb-0 text-sm">
 			                                    	<span class="badge badge-pill bg-soft-success text-success me-2" id="finalizadasHoje">
@@ -305,7 +304,9 @@
 				$('#nomeClienteAtualizacao').text("");
 				$('#nomeClienteAtualizacao').append('Id: '+data.id+'<br />Cliente: '+ data.nomeCliente + '<br />Afetado: '+data.afetado);
 				$('#descricaoAtualizacao').text("");
-				$('#descricaoAtualizacao').append('Descrição: '+data.descricao);
+				$('#descricaoAtualizacao').append('Descrição: '+ data.descricao);
+				$('#abertoPor').text("");
+				$('#abertoPor').append(data.abertoPor);
 				
 				var audio = document.getElementById("beepAudio");
 				audio.play();

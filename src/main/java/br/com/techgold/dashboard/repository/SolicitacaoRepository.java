@@ -78,7 +78,7 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
 	@Query(nativeQuery = true,
 			value = "SELECT s.id, s.afetado, s.categoria, c.nomeCliente, "
 					+ "s.classificacao, s.descricao, c.redFlag, s.status, s.peso, "
-					+ "s.prioridade, c.vip, s.versao, "
+					+ "s.prioridade, c.vip, s.versao, s.abertoPor, "
 					+ "f.nomeFuncionario, s.dataAbertura "
 					+ "FROM solicitacoes s "
 					+ "INNER JOIN clientes c ON s.cliente_id=c.id "

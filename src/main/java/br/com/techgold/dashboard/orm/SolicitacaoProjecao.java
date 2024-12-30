@@ -21,4 +21,5 @@ public interface SolicitacaoProjecao {
 	boolean getVip();
 	boolean getRedFlag();
 	Long getPeso();
+	String getAbertoPor();
 }
