@@ -239,9 +239,33 @@
 		                        </div>
 		                    </div>
 		                </div>
+						<div class="card shadow border-0 mb-7">
+		                    <div class="card-header">
+		                        <h5 class="mb-0" style="color: green;"><i class="bi bi-arrow-clockwise"></i>&nbsp Ultimas Modificações</h5>
+		                    </div>
+		                    <div class="table-responsive">
+		                        <table class="table table-hover table-nowrap">
+		                            <thead class="thead-light">
+		                                <tr>
+		                                    <th scope="col" class="fontth">ID</th>
+		                                    <th scope="col" class="fontth">Cliente</th>
+		                                    <th scope="col" class="fontth">Afetado</th>
+		                                    <th scope="col" class="fontth">Descrição</th>
+		                                    <th scope="col" class="fontth">Classificações</th>
+		                                    <th scope="col" class="fontth">Status</th>
+		                                    <th scope="col" class="fontth">Tecnico</th>
+		                                    <th scope="col" class="fontth">Peso</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="conteudoTabelaUltimas"> </tbody>
+		                        </table>
+		                    </div>
+		                </div>
+						
+						
 		                <div class="card shadow border-0 mb-7">
 		                    <div class="card-header">
-		                        <h5 class="mb-0">Solicitações Prioritárias</h5>
+		                        <h5 class="mb-0" style="color: darkred;"> <i class="bi bi-exclamation-diamond-fill"></i>&nbsp Solicitações Prioritárias</h5>
 		                    </div>
 		                    <div class="table-responsive">
 		                        <table class="table table-hover table-nowrap">
@@ -394,6 +418,7 @@
 				$('#qtdProblemasHoje').text("");
 				$('#qtdAgendadosHoje').text("");
 				$('#conteudoTabela').empty();
+				$('#conteudoTabelaUltimas').empty();
 				
 				if(data.abertasHoje >= 0){ $('#abertasHoje').append('<i class="bi bi-arrow-up me-1"> </i>'+data.abertasHoje); }
 				else{ $('#abertasHoje').append('<i class="bi bi-arrow-down me-1"> </i>'+data.abertasHoje); }
@@ -441,6 +466,39 @@
                                 +'<td '+alertaPeso+'>'+f.peso+'</td>'
                             +'</tr>'
 					$('#conteudoTabela').append(conteudo);
+				});
+				
+				
+				data.ultimasSolicitacoes.map(f => {
+					var vip, redFlag;
+					
+					if(f.prioridade == "CRITICA"){ alertaPrioridade ="class='blink' style='color: red; font-weight: bold;'"; }
+					else if(f.prioridade == "ALTA"){ alertaPrioridade ="style='color: orange; font-weight: bold;'"; }
+					else{ alertaPrioridade ="class='' style=''"; }
+					
+					if(f.peso > 7){ alertaPeso = "class='blink' style='color: red; font-weight: bold;'"; }
+					else if(f.peso > 3 && f.peso <= 7 ){ alertaPeso = "style='color: orange; font-weight: bold;'"; }
+					else{ alertaPeso = "style='color: blue; font-weight: bold;'"; }
+					
+					if(f.vip == true){ vip = "<span style='color: RoyalBlue; font-size: 15px'><p><b> VIP </span>" }else{vip =""}
+					
+					if(f.redFlag == true){ 
+						if(f.vip == true){ redFlag = "-<span class='blink' style='color: red; font-size: 15px'><b> REDFLAG</b></p></span>" }
+						else{ redFlag = "<span class='blink' style='color: red; font-size: 15px'><p><b>REDFLAG</b></p></span>" } 
+					} else{redFlag =""}
+					
+					var conteudo = 
+							'<tr>'
+                               +'<td>'+f.id+'</td>'
+                                +'<td style="padding-top: 0.3rem; padding-bottom: 0.3rem;">'+f.nomeCliente+vip+redFlag+'</td>'
+                                +'<td>'+f.afetado+'</td>'
+                                +'<td style="padding-top: 0.3rem; padding-bottom: 0.3rem;">'+f.descricao+'</td>'
+                                +'<td style="padding-top: 0.3rem; padding-bottom: 0.3rem;">'+'Local:'+f.local+'<br />Classificação: '+f.classificacao+'<br /><span '+alertaPrioridade+' > Prioridade: '+f.prioridade+'</td>'
+                                +'<td>'+f.status+'</td>'
+                                +'<td>'+f.nomeFuncionario+'</td>'
+                                +'<td '+alertaPeso+'>'+f.peso+'</td>'
+                            +'</tr>'
+					$('#conteudoTabelaUltimas').append(conteudo);
 				});
 			},
 			statusCode: {

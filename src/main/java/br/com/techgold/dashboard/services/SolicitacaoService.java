@@ -65,7 +65,7 @@ public class SolicitacaoService {
 				repository.totalAgendamentosAtrasados(LocalDateTime.now()),
 				repository.qtdAgendamentosHoje(hojeInicio, hojeFim),
 				funcionariosDisponiveis,
-				repository.listarSolicitacoes());
+				repository.listarSolicitacoes(), repository.buscaUltimasSolicitacoes());
 	}
 
 	public String buscaUltimaAtualizacaoId() {

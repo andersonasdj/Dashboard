@@ -15,5 +15,6 @@ public record DTODadosDashboard(
 		Long atrasados,
 		Long agendadosHoje,
 		List<DTOFuncionarios> funcionariosDisponiveis,
-		List<SolicitacaoProjecao> solicitacoes) {
+		List<SolicitacaoProjecao> solicitacoes,
+		List<SolicitacaoProjecao> ultimasSolicitacoes) {
 }

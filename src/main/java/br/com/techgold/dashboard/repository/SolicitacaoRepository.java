@@ -87,6 +87,17 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
 	public SolicitacaoProjecao buscaUltimaSolicitacao();
 	
 	@Query(nativeQuery = true,
+			value = "SELECT s.id, s.afetado, s.categoria, c.nomeCliente, "
+					+ "s.classificacao, s.descricao, c.redFlag, s.status, s.peso, "
+					+ "s.prioridade, c.vip, s.versao, s.abertoPor, s.local, "
+					+ "f.nomeFuncionario, s.dataAbertura "
+					+ "FROM solicitacoes s "
+					+ "INNER JOIN clientes c ON s.cliente_id=c.id "
+					+ "LEFT JOIN funcionarios f ON s.funcionario_id=f.id "
+					+ "ORDER BY s.dataAtualizacao DESC limit 3")
+	public List<SolicitacaoProjecao> buscaUltimasSolicitacoes();
+	
+	@Query(nativeQuery = true,
 			value = "SELECT s.dataAtualizacao FROM solicitacoes s ORDER BY s.dataAtualizacao DESC limit 1")
 	public String buscaUltimaSolicitacaoId();
 	
