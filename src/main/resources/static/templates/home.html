@@ -294,11 +294,13 @@
 	<script src="assets/js/jquery-3.6.3.js"></script>
 	<script>
 		let audioLiberado = false;
+		let falandoAgora = false;
 		
+		const filaVoz = [];
+
 		function liberarAudio() {
 		    if (audioLiberado) return;
 
-		    // truque: tocar áudio silencioso
 		    const audio = document.getElementById("beepAudio");
 		    if (audio) {
 		        audio.volume = 0;
@@ -323,8 +325,6 @@
 		    liberarAudio();
 		});
 
-
-
 		$(document).ready(function () {
 			var divSound = $("#soundItem");
 			divSound.on("change", function () {
@@ -333,35 +333,58 @@
 			});
 		});
 		
-		function alteraBeep(){
+		/*function alteraBeep(){
 			$('#beepAudio').remove();
 			var som = $('#soundItem').val();
 			$('#beepSound').append('<audio id="beepAudio"><source src="assets/audio/beep'+som+'.mp3" type="audio/mpeg"></audio>');
+		}*/
+		
+		function alteraBeep(){
+		    const som = $('#soundItem').val();
+
+		    if (som === 'voice') return;
+
+		    $('#beepAudio').remove();
+		    $('#beepSound').append(
+		        `<audio id="beepAudio">
+		            <source src="assets/audio/beep${som}.mp3" type="audio/mpeg">
+		         </audio>`
+		    );
 		}
 		
 		dadosDashboard();
 		setInterval(ultimaAtualizacao, 5000);
 		
-		
-		function falarAtualizacao(nomeTecnico, status, nomeCliente, prioridade) {
-		    if (!('speechSynthesis' in window)) {
-		        console.warn('Navegador não suporta TTS');
-		        return;
-		    }
-
-		    const mensagem = `${nomeTecnico} status ${status} para ${nomeCliente} com prioridade ${prioridade}`;
-
-		    const utterance = new SpeechSynthesisUtterance(mensagem);
-		    utterance.lang = 'pt-BR';
-		    utterance.rate = 2;
-		    utterance.pitch = 7;
-		    utterance.volume = 1;
-
-		    window.speechSynthesis.cancel(); // evita sobreposição
-		    window.speechSynthesis.speak(utterance);
+		function enfileirarFala(texto) {
+		    filaVoz.push(texto);
+		    processarFila();
 		}
 
-		
+		function processarFila() {
+		    if (falandoAgora) return;
+		    if (filaVoz.length === 0) return;
+
+		    falandoAgora = true;
+
+		    const texto = filaVoz.shift();
+		    const utterance = new SpeechSynthesisUtterance(texto);
+
+		    utterance.lang = 'pt-BR';
+		    utterance.rate = 1.4;
+		    utterance.pitch = 1.0;
+		    utterance.volume = 1.0;
+
+		    utterance.onend = () => {
+		        falandoAgora = false;
+		        processarFila(); // fala a próxima
+		    };
+
+		    utterance.onerror = () => {
+		        falandoAgora = false;
+		        processarFila();
+		    };
+		    speechSynthesis.speak(utterance);
+		}
 		
 		function showModal() {
 			$.ajax({
@@ -388,10 +411,12 @@
 				
 				const tipoSom = $('#soundItem').val();
 
+				if (!audioLiberado) return;
 				if (tipoSom === 'voice') {
-				    falarAtualizacao(data.nomeFuncionario, data.status, data.nomeCliente, data.prioridade);
+				    const texto = `${data.nomeFuncionario} status ${data.status} para ${data.nomeCliente} com prioridade ${data.prioridade}`;
+				    enfileirarFala(texto);
 				} else {
-				    var audio = document.getElementById("beepAudio");
+				    const audio = document.getElementById("beepAudio");
 				    if (audio) audio.play();
 				}
 
