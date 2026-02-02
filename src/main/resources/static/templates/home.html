@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-BR">
 	<head>
 		<meta charset="UTF-8">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
@@ -69,6 +69,7 @@
 											<option value="3">3</option>
 											<option value="4">4</option>
 											<option value="5">5</option>
+											<option value="voice">🔊 Voz</option>
 										</select>
 		                        </a>
 		                    </li>
@@ -292,6 +293,38 @@
 	</body>
 	<script src="assets/js/jquery-3.6.3.js"></script>
 	<script>
+		let audioLiberado = false;
+		
+		function liberarAudio() {
+		    if (audioLiberado) return;
+
+		    // truque: tocar áudio silencioso
+		    const audio = document.getElementById("beepAudio");
+		    if (audio) {
+		        audio.volume = 0;
+		        audio.play().then(() => {
+		            audio.pause();
+		            audio.currentTime = 0;
+		            audio.volume = 1;
+		            audioLiberado = true;
+		            console.log("🔓 Áudio liberado");
+		        }).catch(() => {});
+		    }
+
+		    // libera também o speech
+		    if ('speechSynthesis' in window) {
+		        const u = new SpeechSynthesisUtterance('');
+		        window.speechSynthesis.speak(u);
+		        window.speechSynthesis.cancel();
+		    }
+		}
+		
+		$('#soundItem').on('click', function () {
+		    liberarAudio();
+		});
+
+
+
 		$(document).ready(function () {
 			var divSound = $("#soundItem");
 			divSound.on("change", function () {
@@ -307,7 +340,28 @@
 		}
 		
 		dadosDashboard();
-		setInterval(ultimaAtualizacao, 2000);
+		setInterval(ultimaAtualizacao, 5000);
+		
+		
+		function falarAtualizacao(nomeTecnico, status, nomeCliente, prioridade) {
+		    if (!('speechSynthesis' in window)) {
+		        console.warn('Navegador não suporta TTS');
+		        return;
+		    }
+
+		    const mensagem = `${nomeTecnico} status ${status} para ${nomeCliente} com prioridade ${prioridade}`;
+
+		    const utterance = new SpeechSynthesisUtterance(mensagem);
+		    utterance.lang = 'pt-BR';
+		    utterance.rate = 2;
+		    utterance.pitch = 7;
+		    utterance.volume = 1;
+
+		    window.speechSynthesis.cancel(); // evita sobreposição
+		    window.speechSynthesis.speak(utterance);
+		}
+
+		
 		
 		function showModal() {
 			$.ajax({
@@ -332,8 +386,15 @@
 				$('#abertoPor').text("");
 				$('#abertoPor').append(data.abertoPor);
 				
-				var audio = document.getElementById("beepAudio");
-				audio.play();
+				const tipoSom = $('#soundItem').val();
+
+				if (tipoSom === 'voice') {
+				    falarAtualizacao(data.nomeFuncionario, data.status, data.nomeCliente, data.prioridade);
+				} else {
+				    var audio = document.getElementById("beepAudio");
+				    if (audio) audio.play();
+				}
+
 				$("#modal").fadeIn(4000);
 				$("#modal").fadeOut(4500);
 			},
